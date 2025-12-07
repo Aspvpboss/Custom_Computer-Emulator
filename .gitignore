@@ -1,0 +1,9 @@
+
+
+*.exe
+*.cache
+out.txt
+*.json
+.vscode
+
+
