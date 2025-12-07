@@ -213,7 +213,7 @@ int tokenize(void *appstate){
     tk_manager->tk_files = NULL;    
     Token_File *tk_file = NULL;
     uint16_t amount_files = 0;
-
+    
     
     for(int i = 0; i < manager->amount_inputs; i++){
 

@@ -6,7 +6,7 @@ add
 add
 add
 
-.include "c.asm"
+; .include "c.asm"
 
 add
 add

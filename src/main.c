@@ -5,6 +5,7 @@
 
 #include "quit.h"
 
+
 /*
 
     current line count is 2116
@@ -19,7 +20,8 @@
 int main(int argc, char **argv){
 
     Appstate state = {0};
-          
+
+    
 
     MemTrack_Context ctx;
     Set_MemTrack_Context(&ctx);
@@ -28,7 +30,7 @@ int main(int argc, char **argv){
     ctx.config.memory_failure_abort = true;
     ctx.config.print_error_info = true;
 
-    
+
 
     if(initialize(&state, argc, argv)){
         quit(&state);
@@ -55,6 +57,8 @@ int main(int argc, char **argv){
     }
 
     quit(&state);
+
+    
 
     return 0;
 }

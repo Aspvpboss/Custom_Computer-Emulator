@@ -32,6 +32,8 @@ Token_Line* copy_Token_Line(const Token_Line *line){
 
 int copy_exported_symbols(Symbol_Table *dest, Symbol_Table *src, ErrorData *result){
 
+    if(!dest && !src) return 1;
+
     Symbol *src_symbol = src->symbols;
     Symbol *dest_symbol = dest->symbols;
 

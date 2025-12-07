@@ -1,4 +1,4 @@
-inc
+c
 add
 sub
 lrs

@@ -1,63 +1,6 @@
 [
  {
-  "directory": "C:/main/program/C/workbench/Realm-Computer-assembler",
-  "arguments": [
-   "gcc",
-   "-g",
-   "-DTRACK_ALLOCATIONS",
-   "-Wall",
-   "-Werror",
-   "-Wpedantic",
-   "-Iinclude",
-   "-Iinclude/functions",
-   "-Iinclude/structures",
-   "-Iinclude/core",
-   "-Iinclude/utilities",
-   "-IC:/msys64/mingw64/include",
-   "src/main.c"
-  ],
-  "file": "src/main.c"
- },
- {
-  "directory": "C:/main/program/C/workbench/Realm-Computer-assembler",
-  "arguments": [
-   "gcc",
-   "-g",
-   "-DTRACK_ALLOCATIONS",
-   "-Wall",
-   "-Werror",
-   "-Wpedantic",
-   "-Iinclude",
-   "-Iinclude/functions",
-   "-Iinclude/structures",
-   "-Iinclude/core",
-   "-Iinclude/utilities",
-   "-IC:/msys64/mingw64/include",
-   "src/utilities/debug.c"
-  ],
-  "file": "src/utilities/debug.c"
- },
- {
-  "directory": "C:/main/program/C/workbench/Realm-Computer-assembler",
-  "arguments": [
-   "gcc",
-   "-g",
-   "-DTRACK_ALLOCATIONS",
-   "-Wall",
-   "-Werror",
-   "-Wpedantic",
-   "-Iinclude",
-   "-Iinclude/functions",
-   "-Iinclude/structures",
-   "-Iinclude/core",
-   "-Iinclude/utilities",
-   "-IC:/msys64/mingw64/include",
-   "src/utilities/error.c"
-  ],
-  "file": "src/utilities/error.c"
- },
- {
-  "directory": "C:/main/program/C/workbench/Realm-Computer-assembler",
+  "directory": "C:/main/program/VScode/C/Workbench/Realm-Computer-assembler",
   "arguments": [
    "gcc",
    "-g",
@@ -93,7 +36,7 @@
   "file": "src/functions/symbol_functions.c"
  },
  {
-  "directory": "C:/main/program/C/workbench/Realm-Computer-assembler",
+  "directory": "C:/main/program/VScode/C/Workbench/Realm-Computer-assembler",
   "arguments": [
    "gcc",
    "test_validation/test.c",

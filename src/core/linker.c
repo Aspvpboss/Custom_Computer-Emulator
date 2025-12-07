@@ -42,12 +42,14 @@ int resolve_externs(Token_Line *current, Token_File_Manager *token_manager, Erro
         return 1;
     }
 
-    Symbol_Table *new_table = (Symbol_Table*)token_file->symbol_table;
 
     if(!token_file->is_included){
         Set_ErrorData(result, 4, current->original_line, current->tk[2].text, current->file);
         return 1;        
     }
+
+    Symbol_Table *new_table = (Symbol_Table*)token_file->symbol_table;
+
 
 
     if(copy_exported_symbols(current->symbol_table, new_table, result)){
@@ -131,7 +133,7 @@ int resolve_includes_extern(Token_Line *start, Symbol_Table_Manager *sym_manager
             if(resolve_externs(current, token_manager, result))
                 return 1;
 
-            
+
         }
 
         if(check_proper_include(current)){
@@ -148,7 +150,7 @@ int resolve_includes_extern(Token_Line *start, Symbol_Table_Manager *sym_manager
                 return 1;
             }
             update_glob_symbols(current->next, (Symbol_Table*)current->next->symbol_table);
- 
+
         }
     }
 
@@ -169,7 +171,6 @@ int linker(Appstate *state){
         LogError(LINKER_ERROR, &result);
         return 1;
     }
-
     
 
     print_dump_file(&state->tk_manager);
@@ -177,3 +178,9 @@ int linker(Appstate *state){
 
     return 0;
 }
+
+
+
+
+
+
