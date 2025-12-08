@@ -44,7 +44,7 @@ Inline_Macro_Name
 
 Macro_Name r0 r2 r3 r7 r8 r9
 
-
+.include "vorp_vorp.asm"
 
 ; .include "a.asm"
 ; .extern "a.asm"

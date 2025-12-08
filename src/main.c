@@ -21,8 +21,6 @@ int main(int argc, char **argv){
 
     Appstate state = {0};
 
-    
-
     MemTrack_Context ctx;
     Set_MemTrack_Context(&ctx);
     Set_Malloc_Error_Function(quit, &state);

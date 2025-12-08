@@ -7,12 +7,6 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-// #ifdef _WIN32
-// #define BASH_CMD(cmd) cmd
-// #else
-// #define BASH_CMD(cmd) "bash -c \"" cmd "\""
-// #endif
-//
 
 #define BASH_CMD(cmd) cmd
 
@@ -25,26 +19,31 @@ void exit_testing(const char *test_name){
 }
 
 
+static bool is_crash(int r) {
+    return r == -1; // -1 means system() failed to launch the process
+}
+
+
 void test(const char *cmd, bool wanted_result, const char *test_name){
 
     printf("\n[-]-----Running: %s-----[-]\n===============================\n", test_name);
 
     int result = system(cmd);
 
-    if(result){
+    if (is_crash(result))
+        exit_testing(test_name);
 
-        if(!wanted_result)
-            exit_testing(test_name);
+    int exit_code = (result >> 8) & 0xFF; // get the actual program exit code on Windows
 
-        printf("===============================\n\nSuccess - %s\n\n", test_name);
-        return;
+    bool was_success = (exit_code == 0);
 
-    }
-        
-    if(wanted_result)
+    if(wanted_result && !was_success)
+        exit_testing(test_name);
+
+    if(!wanted_result && was_success)
         exit_testing(test_name);
     
-    printf("===============================\nSuccess - %s\n\n", test_name);
+    printf("===============================\n\nSuccess - %s\n\n", test_name);
     return;
 }
 
@@ -98,4 +97,3 @@ int main(){
 
     return 0;
 }
-
