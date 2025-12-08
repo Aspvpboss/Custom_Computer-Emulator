@@ -24,7 +24,7 @@ default: json_build build run
 
 debug: json_build build debug_run
 
-test: json_build test_run
+test: json_build test_build test_run
 
 opt: json_build optimize_build run
 
@@ -45,7 +45,7 @@ run:
 	${OUT} ${COMMAND_ARGS}
 
 test_build: 		
-	@${GCC} test_validation/test.c -o ./test.exe -IC:/msys64/mingw64/include
+	@${GCC} -g test_validation/test.c -o ./test.exe -IC:/msys64/mingw64/include
 
 
 test_run:

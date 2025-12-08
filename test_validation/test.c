@@ -7,8 +7,14 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-// Helper macro to run commands in Git Bash
-#define BASH_CMD(cmd) "bash -c \"" cmd "\""
+// #ifdef _WIN32
+// #define BASH_CMD(cmd) cmd
+// #else
+// #define BASH_CMD(cmd) "bash -c \"" cmd "\""
+// #endif
+//
+
+#define BASH_CMD(cmd) cmd
 
 void exit_testing(const char *test_name){
 
@@ -47,44 +53,45 @@ int main(){
 
     printf("Running validation tests...\n\n");
 
+
     // -------No command args-------
-    test(BASH_CMD("./rca.exe"), FAILURE, "No command args");
+    test(BASH_CMD("rca.exe"), FAILURE, "No command args");
 
     // -------No output file-------
-    test(BASH_CMD("./rca.exe ./test_validation/empty.asm"), FAILURE, "No output file");
+    test(BASH_CMD("rca.exe ./test_validation/empty.asm"), FAILURE, "No output file");
 
     // -------Invalid command arg-------
-    test(BASH_CMD("./rca.exe ./test_validation/empty.asm -o"), FAILURE, "Invalid command arg");
+    test(BASH_CMD("rca.exe ./test_validation/empty.asm -o"), FAILURE, "Invalid command arg");
 
     // -------No output type flag-------
-    test(BASH_CMD("./rca.exe ./test_validation/empty.asm -o out.txt"), FAILURE, "No output type flag");
+    test(BASH_CMD("rca.exe ./test_validation/empty.asm -o out.txt"), FAILURE, "No output type flag");
 
     // -------Duplicate output type flags-------
-    test(BASH_CMD("./rca.exe ./test_validation/empty.asm -o out.txt -B -B"), FAILURE, "Duplicate output type flags");
+    test(BASH_CMD("rca.exe ./test_validation/empty.asm -o out.txt -B -B"), FAILURE, "Duplicate output type flags");
 
     // -------Empty file-------
-    test(BASH_CMD("./rca.exe ./test_validation/empty.asm -o out.txt -B"), FAILURE, "Empty file");
+    test(BASH_CMD("rca.exe ./test_validation/empty.asm -o out.txt -B"), FAILURE, "Empty file");
 
     // -------Failed to find input file-------
-    test(BASH_CMD("./rca.exe ./test_validation/nothing.asm -o out.txt -B"), FAILURE, "Failed to find input file");
+    test(BASH_CMD("rca.exe ./test_validation/nothing.asm -o out.txt -B"), FAILURE, "Failed to find input file");
 
     // -------Invalid output file type-------
-    test(BASH_CMD("./rca.exe ./test_validation/empty.asm -o out.asm -B"), FAILURE, "Invalid output file type");
+    test(BASH_CMD("rca.exe ./test_validation/empty.asm -o out.asm -B"), FAILURE, "Invalid output file type");
 
     // -------Inline macro error-------
-    test(BASH_CMD("./rca.exe ./test_validation/inline_macro.asm -o out.txt -B"), FAILURE, "Inline macro error");
+    test(BASH_CMD("rca.exe ./test_validation/inline_macro.asm -o out.txt -B"), FAILURE, "Inline macro error");
 
     // -------Multi macro error-------
-    test(BASH_CMD("./rca.exe ./test_validation/multi_macro.asm -o out.txt -B"), FAILURE, "Multi macro error");
+    test(BASH_CMD("rca.exe ./test_validation/multi_macro.asm -o out.txt -B"), FAILURE, "Multi macro error");
 
     // -------Cannot find .include file-------
-    test(BASH_CMD("./rca.exe ./test_validation/no_find_include.asm -o out.txt -B"), FAILURE, "Cannot find .include file");
+    test(BASH_CMD("rca.exe ./test_validation/no_find_include.asm -o out.txt -B"), FAILURE, "Cannot find .include file");
 
     // -------Double .include file-------
-    test(BASH_CMD("./rca.exe ./test_validation/multi_include.asm a.asm -o out.txt -B"), FAILURE, "Double .include file");
+    test(BASH_CMD("rca.exe ./test_validation/multi_include.asm a.asm -o out.txt -B"), FAILURE, "Double .include file");
 
     // -------Cannot find .extern file-------
-    test(BASH_CMD("./rca.exe ./test_validation/empty_extern.asm a.asm -o out.txt -B"), FAILURE, "Cannot find .extern file");
+    test(BASH_CMD("rca.exe ./test_validation/empty_extern.asm a.asm -o out.txt -B"), FAILURE, "Cannot find .extern file");
 
 
     printf("\n\nValidation Test succesful!\n");

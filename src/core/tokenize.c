@@ -218,7 +218,7 @@ int tokenize(void *appstate){
     for(int i = 0; i < manager->amount_inputs; i++){
 
         tk_file = tokenize_file(&manager->inputs[i], &result);
-        printf("burger\n");
+
         if(tk_file == NULL){
             LogError(FILE_ERROR, &result);
             tk_manager->amount_files = amount_files;
