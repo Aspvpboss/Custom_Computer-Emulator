@@ -3,14 +3,10 @@
 #include "assert.h"
 
 
+
 void free_file_manager(File_Manager *manager){
 
-    if(!manager)
-        return;
-
     for(int i = 0; i < manager->amount_inputs; i++){
-        if(!manager->inputs[i].raw_text)
-            continue;
 
         for(int x = 0; x < manager->inputs[i].num_lines; x++)
             t_free(manager->inputs[i].raw_text[x]);
@@ -31,15 +27,11 @@ void free_file_manager(File_Manager *manager){
 
 }
 
+
 void free_tokenized_line(Token_Line *tl){
 
-    if(!tl)
-        return;
-
-    if(tl->tk){
-        for(int i = 0; i < tl->amount_tokens; i++){
-            t_free(tl->tk[i].text);
-        }
+    for(int i = 0; i < tl->amount_tokens; i++){
+        t_free(tl->tk[i].text);
     }
 
     t_free(tl->tk);
@@ -47,14 +39,12 @@ void free_tokenized_line(Token_Line *tl){
 
 void free_tokenized_file(Token_File *tf){
 
-    if(!tf)
-        return;
 
-    if(tf->file)
-        t_free(tf->file);
+    t_free(tf->file);
 
     if(tf->is_included)
         return;
+
 
     Token_Line *current = tf->head;
     Token_Line *next = NULL;
@@ -75,10 +65,7 @@ void free_tokenized_file(Token_File *tf){
 
 void free_tok_file_manager(Token_File_Manager *manager){
 
-    if(!manager)
-        return;
-
-    if(manager->amount_files == 0 || !manager->tk_files){
+    if(manager->amount_files == 0){
         return;
     }
 
@@ -93,16 +80,10 @@ void free_tok_file_manager(Token_File_Manager *manager){
 
 void free_symbol(Symbol *sym){
 
-    if(!sym)
-        return;
-
     if(sym->is_imported)
         return;
 
     t_free(sym->text);
-
-    if(!sym->data)
-        return;
 
     switch(sym->type){
 
@@ -110,24 +91,29 @@ void free_symbol(Symbol *sym){
             break;
 
         case SYMBOL_MACRO_MUL:{
+
             Mul_Macro_Data *sym_data = (Mul_Macro_Data*)sym->data;
-            if(sym_data && sym_data->args){
-                for(int i = 0; i < sym_data->amount_args; i++){
-                    t_free(sym_data->args[i]);
-                }
+            for(int i = 0; i < sym_data->amount_args; i++){
+                t_free(sym_data->args[i]);
             }
             t_free(sym_data->args);
+
             break;
         }
 
+        
         case SYMBOL_MACRO_SINGLE: {
+
             Single_Macro_Data *sym_data = (Single_Macro_Data*)sym->data;
-            if(sym_data)
-                t_free(sym_data->macro);
+
+            t_free(sym_data->macro);
+
             break;
         }
+
 
         default:
+
             break;
 
     }
@@ -139,15 +125,12 @@ void free_symbol(Symbol *sym){
 
 void free_symbol_table(Symbol_Table *table){
 
-    if(!table)
-        return;
-
     t_free(table->file);
 
-    if(table->symbols){
-        for(int i = 0; i < table->amount_symbols; i++){
-            free_symbol(&table->symbols[i]);
-        }
+    for(int i = 0; i < table->amount_symbols; i++){
+
+        free_symbol(&table->symbols[i]);
+
     }
 
     t_free(table->symbols);
@@ -156,13 +139,10 @@ void free_symbol_table(Symbol_Table *table){
 
 void free_symbol_table_manager(Symbol_Table_Manager *manager){
 
-    if(!manager)
-        return;
+    for(int i = 0; i < manager->amount_tables; i++){
 
-    if(manager->tables){
-        for(int i = 0; i < manager->amount_tables; i++){
-            free_symbol_table(&manager->tables[i]);
-        }
+        free_symbol_table(&manager->tables[i]);
+
     }
 
     t_free(manager->tables);
@@ -171,9 +151,6 @@ void free_symbol_table_manager(Symbol_Table_Manager *manager){
 
 
 void quit(void *appstate){
-
-    if(!appstate)
-        return;
 
     Appstate *state = (Appstate*)appstate; 
 
@@ -185,6 +162,7 @@ void quit(void *appstate){
 
     if(check_memory_leak())
         print_tracking_info();
+
 
     free_tracking_info();
 
