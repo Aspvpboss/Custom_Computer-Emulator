@@ -4,8 +4,8 @@ this is a assembler for my redstone computer
 --things to work on--
 
 
-revamp init.c to be more readable, dear god
-debug flags for assembler, aka print dump file or symbols
+I need to make lexer.c more readable
+Add a debug dump .txt, 
 macros stuff
 
 
