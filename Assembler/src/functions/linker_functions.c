@@ -32,33 +32,29 @@ Token_Line* copy_Token_Line(const Token_Line *line){
 
 int copy_exported_symbols(Symbol_Table *dest, Symbol_Table *src, ErrorData *result){
 
-    if(!dest && !src) return 1;
 
-    Symbol *src_symbol = src->symbols;
-    Symbol *dest_symbol = dest->symbols;
+    if(!dest || !src) return 1;
 
     for(int i = 0; i < src->amount_symbols; i++){
         
-        if(!src_symbol[i].is_exported)
+        if(!src->symbols[i].is_exported)
             continue;
 
-        if(find_symbol_by_name(src_symbol[i].text, dest)){
-            Set_ErrorData(result, 0, src_symbol[i].at_line->original_line, dest->file, src_symbol[i].at_line->file);
+        if(find_symbol_by_name(src->symbols[i].text, dest)){
+            Set_ErrorData(result, 0, src->symbols[i].at_line->original_line,
+                          dest->file, src->symbols[i].at_line->file);
             return 1;
         }
 
         dest->amount_symbols++;
-        dest_symbol = t_realloc(dest_symbol, sizeof(Symbol) * dest->amount_symbols);
-        Symbol *new_symbol = &dest_symbol[dest->amount_symbols - 1];
-        *new_symbol = src_symbol[i];
+        dest->symbols = t_realloc(dest->symbols, sizeof(Symbol) * dest->amount_symbols);
+        Symbol *new_symbol = &dest->symbols[dest->amount_symbols - 1];
+        *new_symbol = src->symbols[i];
         new_symbol->is_imported = 1;
         new_symbol->is_exported = 0;
-
     }
 
-    dest->symbols = dest_symbol;
-    
-    return 0;
+    return 0;    
 }
 
 

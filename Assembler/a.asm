@@ -1,6 +1,8 @@
 
 
 
+; .glob dup_label
+
 add
 add
 add
@@ -29,6 +31,8 @@ at 0x00
 
 .macroend
 
+
+dup_label:
 
 
 start:

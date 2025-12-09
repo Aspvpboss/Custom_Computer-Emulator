@@ -49,10 +49,10 @@ int main(int argc, char **argv){
     }
 
     
-    // if(linker(&state)){
-    //     quit(&state);
-    //     return 1;            
-    // }
+    if(linker(&state)){
+        quit(&state);
+        return 1;            
+    }
 
     quit(&state);
 
