@@ -8,16 +8,13 @@
 
 /*
 
-    current line count is 2116
-    before finishing linking
-    bruh
-
-    this is just including src and include files
+    current line count is 2532
 
 */
 
 
 int main(int argc, char **argv){
+
 
     Appstate state = {0};
 
@@ -29,11 +26,12 @@ int main(int argc, char **argv){
     ctx.config.print_error_info = true;
 
 
-
     if(initialize(&state, argc, argv)){
         quit(&state);
         return 1;
     }
+
+
 
     if(tokenize(&state)){
         quit(&state);

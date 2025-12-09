@@ -11,8 +11,6 @@ int parse_command_args(Appstate *state, int argc, char *argv[], ErrorData *resul
     manager->amount_inputs = 0;
     manager->output.path = NULL;
 
-    configs->debug_info = NULL;
-    configs->amount_debug = 0;
     configs->output_type = NO_OUTPUT;
 
     int function_ret = 0;
