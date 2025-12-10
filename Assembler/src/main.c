@@ -2,6 +2,7 @@
 #include "tokenize.h"
 #include "lexer.h"
 #include "linker.h"
+#include "debug.h"
 
 #include "quit.h"
 
@@ -50,6 +51,11 @@ int main(int argc, char **argv){
     if(linker(&state)){
         quit(&state);
         return 1;            
+    }
+
+    if(debug(&state)){
+        quit(&state);
+        return 1;
     }
 
     quit(&state);
