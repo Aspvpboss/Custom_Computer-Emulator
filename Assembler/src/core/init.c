@@ -23,12 +23,19 @@ int parse_command_args(Appstate *state, int argc, char *argv[], ErrorData *resul
 
     for(int i = 1; i < argc; i++){
 
+
+        function_ret = parse_input_files(manager, argv, i);
+        if(function_ret == 1)
+            continue;
+        
+        
         function_ret = parse_output_file(manager, argv, argc, &i, result);
         if(function_ret == 1)
             continue;
         if(function_ret == -1)
             return 1;
         
+
 
 
         function_ret = parse_output_types(configs, argv, i, result);
@@ -38,10 +45,10 @@ int parse_command_args(Appstate *state, int argc, char *argv[], ErrorData *resul
             return 1;
 
 
-        function_ret = parse_input_files(manager, argv, i);
+
+        function_ret = parse_debug_flags(configs, argv, i);
         if(function_ret == 1)
             continue;
-
 
 
         Set_ErrorData(result, 1, 0, argv[i], NULL);
@@ -168,7 +175,6 @@ int initialize(Appstate *state, int argc, char **argv){
     
 
     read_files(&state->manager);
-
 
 
     return 0;

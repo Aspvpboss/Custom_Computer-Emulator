@@ -104,22 +104,19 @@ int parse_input_files(File_Manager *manager, char **argv, int i){
 }
 
 
-int parse_debug_flags(Assembler_Configs *configs, char *_arg){
+int parse_debug_flags(Assembler_Configs *configs, char **argv, int i){
+  
+    if(!configs || !argv)
+        return 1;
 
-    //int amount_debug = configs->amount_debug;
+    char debug_flag[] = "-debug_dump";
+    configs->Dump_Debug_Info = false;
 
-    if(strcmp(_arg, "-all_debug") == 0){
-
+    if(strcmp(argv[i], debug_flag) == 0){
+        configs->Dump_Debug_Info = true;
+        return 1;
     }
-    if(strcmp(_arg, "-symbol_info") == 0){
 
-    }
-    if(strcmp(_arg, "-premacro_dump") == 0){
-
-    }
-    if(strcmp(_arg, "-postmacro_dump") == 0){
-
-    }
 
     return 0;
 }

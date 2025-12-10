@@ -173,8 +173,8 @@ int linker(Appstate *state){
     }
     
 
-    print_dump_file(&state->tk_manager);
-    print_symbols(&state->symbol_manager);
+    // print_dump_file(&state->tk_manager);
+    // print_symbols(&state->symbol_manager);
 
     return 0;
 }
