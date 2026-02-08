@@ -13,6 +13,9 @@ const char *debug_symbol_type_to_string(Symbol_Type type) {
 }
 
 
+
+
+
 void debug_dump_file(Token_File_Manager *manager, FILE *debug_file){
 
     fprintf(debug_file, "\nDump File (pre macro expansions)\n");
@@ -46,6 +49,10 @@ void debug_dump_file(Token_File_Manager *manager, FILE *debug_file){
     
     fprintf(debug_file, "\n\n");
 }
+
+
+
+
 
 void debug_dump_symbols(Symbol_Table_Manager *manager, FILE *debug_file){
 
