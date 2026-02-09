@@ -3,11 +3,6 @@
 
 #include "my_stdtypes.h"
 
-struct Memory{
 
-    u8 *memory;
-    u16 capacity;
-
-};
 
 #endif

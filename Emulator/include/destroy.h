@@ -3,5 +3,6 @@
 
 #include "emulator.h"
 
+void destroy(Emulator *emu);
 
 #endif

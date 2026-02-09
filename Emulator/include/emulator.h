@@ -1,11 +1,14 @@
 #ifndef EMULATOR_H
 #define EMULATOR_H
 
-#include "memory.h"
+#include "my_stdtypes.h"
+#include "SDK.h"
 
 typedef struct{
 
-    Memory *memory;
+    u8 memory[0xffff];
+    SDK_Input *input;
+    SDK_Display *display;
 
 } Emulator;
 

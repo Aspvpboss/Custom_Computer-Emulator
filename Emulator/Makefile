@@ -10,8 +10,8 @@ LINK = -lSDL3 -lSDL3_image -lSDL3_mixer -lSDL3_ttf
 
 
 W_FLAGS = -Wall -Werror -Wpedantic
-OPT_FLAG = -O2 -s
-DEBUG_FLAG = -g
+OPT_FLAG = -O2 -s -DSTDLIB_ALLOCATIONS
+DEBUG_FLAG = -g -DDEBUG -DTRACK_ALLOCATIONS
 
 
 default: debug_build run

@@ -15,4 +15,11 @@ typedef signed short i16;
 typedef signed int i32;
 typedef signed long long i64;
 
+#ifdef DEBUG
+    #define d_printf(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#else
+    #define d_printf(fmt, ...)
+#endif
+
+
 #endif
