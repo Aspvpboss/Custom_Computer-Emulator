@@ -1,7 +1,7 @@
 #ifndef EMU_ITERATE_H__
 #define EMU_ITERATE_H__
 
-#include "emulator.h"
+#include "emulator/emulator.h"
 
 typedef enum{
 

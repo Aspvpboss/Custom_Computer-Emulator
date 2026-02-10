@@ -1,10 +1,10 @@
 
 GCC = gcc
 
-SRC = $(wildcard src/*.c)
+SRC = $(wildcard src/*.c src/emulator/*.c)
 OUT = build/CEMU.exe
 
-INCLUDE = -ISDK1/include -Iinclude 
+INCLUDE = -ISDK1/include -Iinclude  
 LIB = -LSDK1/lib 
 LINK = -lSDL3 -lSDL3_image -lSDL3_mixer -lSDL3_ttf
 

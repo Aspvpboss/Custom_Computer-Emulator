@@ -23,7 +23,7 @@ int main(){
             return 1;
         }
 
-        SDK_Update_Previous_Inputs(emu->input);
+        SDK_Update_Previous_Inputs(emu->sdk_io.input);
         
     }
 

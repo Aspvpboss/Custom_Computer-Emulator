@@ -5,7 +5,7 @@
 EMU_Result iterate(Emulator *emu){
 
     static SDL_Event e;
-    SDK_Input *input = emu->input;
+    SDK_Input *input = emu->sdk_io.input;
 
     while(SDL_PollEvent(&e)){
         if(e.type == SDL_EVENT_QUIT){

@@ -1,6 +1,7 @@
 #include "init.h"
 
 
+
 Emulator* init(){
 
     if(SDK_Init(NULL, NULL, false, true, false))
