@@ -34,6 +34,7 @@ enum FPU_Registers{
 
 };
 
+// ALU functions
 
 
 typedef struct{
