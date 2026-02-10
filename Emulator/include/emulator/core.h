@@ -36,15 +36,48 @@ enum FPU_Registers{
 
 // ALU functions
 
+typedef int (*ALU_add)(u16, u16, u16*);
+typedef int (*ALU_sub)(u16, u16, u16*);
+typedef int (*ALU_mul)(u16, u16, u16*);
+typedef int (*ALU_div)(u16, u16, u16*);
+typedef int (*ALU_mod)(u16, u16, u16*);
+typedef int (*ALU_and)(u16, u16, u16*);
+typedef int (*ALU_nor)(u16, u16, u16*);
+typedef int (*ALU_xor)(u16, u16, u16*);
+typedef int (*ALU_cmp)(u16, u16);
 
 typedef struct{
 
     u16 registers[ALU_REG_AMOUNT];
+    ALU_add add;
+    ALU_sub sub;
+    ALU_mul mul;
+    ALU_div div;
+    ALU_mod mod;
+    ALU_and and;
+    ALU_nor nor;
+    ALU_xor xor;
+    ALU_cmp cmp;
 
 } EMU_Alu;
 
+
+typedef int (*FPU_add)(f16, f16, f16*);
+typedef int (*FPU_sub)(f16, f16, f16*);
+typedef int (*FPU_mul)(f16, f16, f16*);
+typedef int (*FPU_div)(f16, f16, f16*);
+typedef int (*FPU_sqrt)(f16, f16, f16*);
+typedef int (*FPU_cmp)(f16, f16);
+
+
 typedef struct{
 
+    FPU_add add;
+    FPU_sub sub;
+    FPU_mul mul;
+    FPU_div div;
+    FPU_sqrt sqrt;
+    FPU_cmp cmp;
     f16 registers[FPU_REG_AMOUNT];
 
 } EMU_Fpu;

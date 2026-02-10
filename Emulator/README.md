@@ -49,6 +49,7 @@ FSUB
 FMUL
 FDIV
 FSQRT
+FCMP
 
 
-// 29 total instructions
+// 29c total instructions
