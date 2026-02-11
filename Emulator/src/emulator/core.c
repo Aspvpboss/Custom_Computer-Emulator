@@ -1,5 +1,6 @@
 #include "emulator/core.h"
 
+#include <fenv.h>
 
 
 
@@ -56,7 +57,7 @@ static void alu_sub(u16 a, u16 b, u16 *dst, CMP_Flags *flags){
 
     u16 result = (u16)wide;
     
-    if(a >= b)
+    if(a < b)
         *flags |= CMP_CAR;
 
     if(((a ^ b) & (a ^ result) & 0x8000) != 0)
@@ -64,9 +65,22 @@ static void alu_sub(u16 a, u16 b, u16 *dst, CMP_Flags *flags){
 
 }
 
-// static void alu_mul(u16 a, u16 b, u16 *dst){
-//     (*dst) = a * b;
-// }
+static void alu_mul(u16 a, u16 b, u16 *dst, CMP_Flags *flags){
+    u32 result = a * b;
+    (*dst) = result;
+    
+    if(result > __UINT16_MAX__){
+        *flags |= CMP_CAR;
+    }
+
+    i16 upper = result >> 16;
+    i16 sign = (i16)result >> 16;
+
+    if(sign != upper){
+        *flags |= CMP_OVER;
+    }
+    
+}
 
 // static void alu_div(u16 a, u16 b, u16 *dst){
 //     (*dst) = (u16)(a / b);
@@ -139,9 +153,11 @@ EMU_Core* EMU_CreateCore(){
     core->flags = 0;
 
     core->alu.cmp = alu_cmp;
-
+    core->alu.add = alu_add;
+    core->alu.sub = alu_sub;
+    
     u16 result = 0;
-    alu_add(__INT16_MAX__, 10, &result, &core->flags);
+    alu_mul(0, __UINT16_MAX__, &result, &core->flags);
 
     print_cmp_flags(core->flags);
     d_printf("%d\n", result);
