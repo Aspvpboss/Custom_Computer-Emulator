@@ -3,7 +3,7 @@
 
 #include "my_stdtypes.h"
 #include "SDK.h"
-
+#include "emulator/core.h"
 
 typedef struct{
 
