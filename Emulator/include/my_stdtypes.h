@@ -1,6 +1,8 @@
 #ifndef MY_STDTYPES_H
 #define MY_STDTYPES_H
 
+#include <stdio.h>
+
 typedef _Float16 f16;
 typedef float f32;
 typedef double f64;

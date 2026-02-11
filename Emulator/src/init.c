@@ -25,5 +25,7 @@ Emulator* init(){
         return NULL;
     }
 
+    EMU_CreateCore();
+
     return emu;
 }

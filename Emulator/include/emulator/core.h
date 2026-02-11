@@ -61,15 +61,16 @@ typedef u16 CMP_Flags;
 
 // ALU functions
 
-typedef void (*ALU_add)(u16, u16, u16*);
-typedef void (*ALU_sub)(u16, u16, u16*);
-typedef void (*ALU_mul)(u16, u16, u16*);
-typedef void (*ALU_div)(u16, u16, u16*);
-typedef void (*ALU_mod)(u16, u16, u16*);
+typedef void (*ALU_add)(u16, u16, u16*, CMP_Flags*);
+typedef void (*ALU_sub)(u16, u16, u16*, CMP_Flags*);
+typedef void (*ALU_mul)(u16, u16, u16*, CMP_Flags*);
+typedef void (*ALU_div)(u16, u16, u16*, CMP_Flags*);
+typedef void (*ALU_mod)(u16, u16, u16*, CMP_Flags*);
 typedef void (*ALU_and)(u16, u16, u16*);
 typedef void (*ALU_nor)(u16, u16, u16*);
 typedef void (*ALU_xor)(u16, u16, u16*);
 typedef void (*ALU_cmp)(u16, u16, CMP_Flags*);
+
 
 typedef struct{
 
@@ -118,9 +119,7 @@ typedef struct{
 } EMU_Core;
 
 
-
-
-void alu_cmp(u16 a, u16 b, CMP_Flags *dst);
+EMU_Core* EMU_CreateCore();
 
 
 #endif
