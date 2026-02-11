@@ -82,25 +82,52 @@ static void alu_mul(u16 a, u16 b, u16 *dst, CMP_Flags *flags){
     
 }
 
-// static void alu_div(u16 a, u16 b, u16 *dst){
-//     (*dst) = (u16)(a / b);
-// }
+static void alu_div(u16 a, u16 b, u16 *dst, CMP_Flags *flags){
 
-// static void alu_mod(u16 a, u16 b, u16 *dst){
-//     (*dst) = (u16)(a % b);
-// }
+    if(b == 0){
+        *flags |= CMP_OVER;
+        (*dst) = 0;
+        return;
+    }
 
-// static void alu_and(u16 a, u16 b, u16 *dst){
-//     (*dst) = a & b;
-// }
+    if((i16)a == -__INT16_MAX__ && (i16)b == -1){
+        *flags |= CMP_CAR;
+        (*dst) = 0;
+        return;
+    }
 
-// static void alu_nor(u16 a, u16 b, u16 *dst){
-//     (*dst) = ~(a || b);
-// }
+    (*dst) = (u16)(a / b);
 
-// static void alu_xor(u16 a, u16 b, u16 *dst){
-//     (*dst) = a ^ b;
-// }
+}
+
+static void alu_mod(u16 a, u16 b, u16 *dst, CMP_Flags *flags){
+    if(b == 0){
+        *flags |= CMP_OVER;
+        (*dst) = 0;
+        return;
+    }
+
+    if((i16)a == -__INT16_MAX__ && (i16)b == -1){
+        *flags |= CMP_CAR;
+        (*dst) = 0;
+        return;
+    }
+
+
+    (*dst) = (u16)(a % b);
+}
+
+static void alu_and(u16 a, u16 b, u16 *dst){
+    (*dst) = a & b;
+}
+
+static void alu_nor(u16 a, u16 b, u16 *dst){
+    (*dst) = ~(a | b);
+}
+
+static void alu_xor(u16 a, u16 b, u16 *dst){
+    (*dst) = a ^ b;
+}
 
 static void alu_cmp(u16 a, u16 b, CMP_Flags *dst){
     
@@ -145,6 +172,23 @@ static void alu_cmp(u16 a, u16 b, CMP_Flags *dst){
 
 }
 
+static void alu_ars(u16 a, u16 shift, u16 *dst, CMP_Flags *flags){
+    *dst = (i16)a >> shift;
+}
+
+static void alu_lrs(u16 a, u16 shift, u16 *dst, CMP_Flags *flags){
+    *dst = (u16)a >> shift;
+}
+
+static void alu_lls(u16 a, u16 shift, u16 *dst, CMP_Flags *flags){
+    u32 result = a << shift;
+    if(result >> 16){
+        *flags |= CMP_OVER;
+    }
+
+    *dst = (u16)result;
+}
+
 
 EMU_Core* EMU_CreateCore(){
 
@@ -152,12 +196,23 @@ EMU_Core* EMU_CreateCore(){
 
     core->flags = 0;
 
-    core->alu.cmp = alu_cmp;
     core->alu.add = alu_add;
     core->alu.sub = alu_sub;
+    core->alu.mul = alu_mul;
+    core->alu.div = alu_div;
+    core->alu.mod = alu_mod;
+
+    core->alu.ars = alu_ars;
+    core->alu.lrs = alu_lrs;
+    core->alu.lls = alu_lls;
+
+    core->alu.cmp = alu_cmp;
+    core->alu.and = alu_and;
+    core->alu.nor = alu_nor;
+    core->alu.xor = alu_xor;
     
     u16 result = 0;
-    alu_mul(0, __UINT16_MAX__, &result, &core->flags);
+    alu_lls(__INT16_MAX__, 2, &result, &core->flags);
 
     print_cmp_flags(core->flags);
     d_printf("%d\n", result);

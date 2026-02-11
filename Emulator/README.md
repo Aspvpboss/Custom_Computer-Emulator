@@ -32,7 +32,7 @@ JIF
 CAL
 CIF
 
-// 10 alu instructions
+// 12 alu instructions
 ADD
 SUB
 MUL
@@ -40,8 +40,12 @@ DIV
 MOD
 AND
 NOR
+ARS
+LRS
+LLS
 XOR
 CMP
+
 
 // 6 float instructions
 FADD
@@ -52,4 +56,4 @@ FSQRT
 FCMP
 
 
-// 29c total instructions
+// 31 total instructions
