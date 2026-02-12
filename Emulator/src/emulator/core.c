@@ -211,11 +211,8 @@ EMU_Core* EMU_CreateCore(){
     core->alu.nor = alu_nor;
     core->alu.xor = alu_xor;
     
-    u16 result = 0;
-    alu_lls(__INT16_MAX__, 2, &result, &core->flags);
-
-    print_cmp_flags(core->flags);
-    d_printf("%d\n", result);
+    memset(core->alu.registers, 0, sizeof(core->alu.registers));
+    memset(core->fpu.registers, 0, sizeof(core->fpu.registers));
 
     return core;
 }

@@ -12,17 +12,22 @@ Mode  Name               Extra bytes   Meaning
 110   Immediate8         1             #imm8
 111   Immediate16        2             #imm16
 
+
+of the 8 general purpose register, but there will "16 general purpose registers"
+the 8 bit version of it, and the 16 bit version of it
+
+
 ISA
 
-// 8 memory instructions
-LOAD16
-LOAD8
-STR16
-STR8
-PUSH8
-PUSH16
-POP8
-POP16
+// 7 memory instructions (operand will determine if 8 bit or 16 bit)
+LOAD
+STR
+PUSH
+POP
+LDI
+LDF
+MOV
+
 
 // byte in opcode will determine if absolute or relative
 // 5 control flow instructions
@@ -40,20 +45,22 @@ DIV
 MOD
 AND
 NOR
+XOR
 ARS
 LRS
 LLS
-XOR
 CMP
 
 
-// 6 float instructions
+// 8 float instructions
 FADD
 FSUB
 FMUL
 FDIV
 FSQRT
 FCMP
+FINT
+IFLO
 
 
-// 31 total instructions
+// 32 total instructions
