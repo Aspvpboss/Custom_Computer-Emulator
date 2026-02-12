@@ -100,7 +100,7 @@ typedef void (*FPU_mul)(f16, f16, f16*, CMP_Flags*);
 typedef void (*FPU_div)(f16, f16, f16*, CMP_Flags*);
 typedef void (*FPU_sqrt)(f16, f16*, CMP_Flags*);
 typedef void (*FPU_cmp)(f16, f16, CMP_Flags*);
-typedef void (*FPU_fint)(f16, i16*);
+typedef void (*FPU_fint)(f16, u16*);
 typedef void (*FPU_iflo)(u16, f16*);
 
 

@@ -285,7 +285,13 @@ static void fpu_cmp(f16 a, f16 b, CMP_Flags *flags){
 
 }
 
+static void fpu_fint(f16 input, u16 *output){
+    *output = (u16)(input);
+}
 
+static void fpu_iflo(u16 input, f16 *output){
+    *output = (f16)((i16)input);
+}
 
 EMU_Core* EMU_CreateCore(){
 
@@ -314,18 +320,20 @@ EMU_Core* EMU_CreateCore(){
     core->fpu.div = fpu_div;
     core->fpu.sqrt = fpu_sqrt;
     core->fpu.cmp = fpu_cmp;
+    core->fpu.fint = fpu_fint;
+    core->fpu.iflo = fpu_iflo;
 
     memset(core->alu.registers, 0, sizeof(core->alu.registers));
     memset(core->fpu.registers, 0, sizeof(core->fpu.registers));
 
-    u16 temp = -50;
-    f16 result = (f16)temp;
-    CMP_Flags flags = 0;
+    u16 a = 1234;
+    f16 b = 20.134;
 
+    core->fpu.fint(b, &a);
 
-    print_cmp_flags(flags);
+    printf("signed int %d\n", (i16)a);
+    printf("f16 %f\n", (f64)b);
 
-    d_printf("%f\n", (double)result);
 
     return core;
 }
