@@ -2,10 +2,7 @@
 #include "iterate.h"
 #include "destroy.h"
 #include "assert.h"
-
-
-
-
+#include <fenv.h>
 
 
 
@@ -18,6 +15,7 @@ int main(){
     }
 
     EMU_Result result = EMU_CONTINUE;
+
 
 
     while(result == EMU_CONTINUE){

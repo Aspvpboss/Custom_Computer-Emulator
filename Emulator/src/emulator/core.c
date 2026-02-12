@@ -1,7 +1,7 @@
 #include "emulator/core.h"
 
 #include <fenv.h>
-
+#include <math.h>
 
 
 void print_cmp_flags(CMP_Flags flags){
@@ -190,6 +190,103 @@ static void alu_lls(u16 a, u16 shift, u16 *dst, CMP_Flags *flags){
 }
 
 
+static void fpu_add(f16 a, f16 b, f16 *dst, CMP_Flags *flags){
+
+    feclearexcept(FE_ALL_EXCEPT);
+
+    *dst = a + b;
+
+    int f_flags = fetestexcept(FE_ALL_EXCEPT);
+
+    if(f_flags & FE_ALL_EXCEPT){
+        *flags |= CMP_OVER;
+        *dst = 0.0f;
+    }
+
+}
+
+static void fpu_sub(f16 a, f16 b, f16 *dst, CMP_Flags *flags){
+
+    feclearexcept(FE_ALL_EXCEPT);
+
+    *dst = a - b;
+
+    int f_flags = fetestexcept(FE_ALL_EXCEPT);
+
+    if(f_flags & (FE_UNDERFLOW | FE_OVERFLOW)){
+        *flags |= CMP_OVER;
+        *dst = 0.0f;
+    }
+
+}
+ 
+static void fpu_mul(f16 a, f16 b, f16 *dst, CMP_Flags *flags){
+
+    feclearexcept(FE_ALL_EXCEPT);
+
+    *dst = a * b;
+
+    int f_flags = fetestexcept(FE_ALL_EXCEPT);
+
+    if(f_flags & FE_ALL_EXCEPT){
+        *flags |= CMP_OVER;
+        *dst = 0.0f;
+    }
+
+}
+
+static void fpu_div(f16 a, f16 b, f16 *dst, CMP_Flags *flags){
+
+    feclearexcept(FE_ALL_EXCEPT);
+
+    *dst = a / b;
+
+    int f_flags = fetestexcept(FE_ALL_EXCEPT);
+
+    if(f_flags & FE_ALL_EXCEPT){
+        *flags |= CMP_OVER;
+        *dst = 0.0f;
+    }
+
+}
+
+static void fpu_sqrt(f16 a, f16 *dst, CMP_Flags *flags){
+
+    feclearexcept(FE_ALL_EXCEPT);
+
+    *dst = sqrtf((f16)a);
+
+    int f_flags = fetestexcept(FE_ALL_EXCEPT);
+
+    if(f_flags & FE_ALL_EXCEPT){
+        *flags |= CMP_OVER;
+        *dst = 0.0f;
+    }
+
+}
+
+static void fpu_cmp(f16 a, f16 b, CMP_Flags *flags){
+
+    if(a < b){
+        *flags |= (CMP_SLT | CMP_SLE);
+    }
+    if(a > b){
+        *flags |= (CMP_SGR | CMP_SGE);
+    }
+    if(a == b){
+        *flags |= (CMP_SGE | CMP_SLE | CMP_EQU);
+    }
+    if(a != b){
+        *flags |= CMP_NEQ;
+    }
+    if(a == 0.0f){
+        *flags |= CMP_IF0;
+    }
+
+}
+
+
+
 EMU_Core* EMU_CreateCore(){
 
     EMU_Core *core = t_malloc(sizeof(EMU_Core));
@@ -210,9 +307,25 @@ EMU_Core* EMU_CreateCore(){
     core->alu.and = alu_and;
     core->alu.nor = alu_nor;
     core->alu.xor = alu_xor;
-    
+
+    core->fpu.add = fpu_add;
+    core->fpu.sub = fpu_sub;
+    core->fpu.mul = fpu_mul;
+    core->fpu.div = fpu_div;
+    core->fpu.sqrt = fpu_sqrt;
+    core->fpu.cmp = fpu_cmp;
+
     memset(core->alu.registers, 0, sizeof(core->alu.registers));
     memset(core->fpu.registers, 0, sizeof(core->fpu.registers));
+
+    u16 temp = -50;
+    f16 result = (f16)temp;
+    CMP_Flags flags = 0;
+
+
+    print_cmp_flags(flags);
+
+    d_printf("%f\n", (double)result);
 
     return core;
 }
