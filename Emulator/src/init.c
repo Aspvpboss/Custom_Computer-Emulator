@@ -25,7 +25,8 @@ Emulator* init(){
         return NULL;
     }
 
-    EMU_CreateCore();
+    EMU_init_alu(&emu->alu);
+    EMU_init_fpu(&emu->fpu);
 
     return emu;
 }

@@ -3,7 +3,9 @@
 
 #include "my_stdtypes.h"
 #include "SDK.h"
-#include "emulator/core.h"
+#include "emulator/alu.h"
+#include "emulator/fpu.h"
+
 
 typedef struct{
 
@@ -17,6 +19,9 @@ typedef struct{
 
     u8 memory[0xffff];
     SDK_IO sdk_io;
+    EMU_Alu alu;
+    EMU_Fpu fpu;
+    CMP_Flags flags;
 
 } Emulator;
 
