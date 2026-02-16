@@ -2,6 +2,8 @@
 
 Address space
 
+most functions will be XIP, but there should be a function in ram that will switch banks, so that the program isn't running from the rom bank while it is switch banks
+
 0x0000 - 0x00FF: hardcoded bootloader (256B)
 
 0x0100 - 0x7EFF: RAM (~32 KiB)
@@ -22,8 +24,8 @@ Mode  Name               Extra bytes   Meaning
 001   Reg indirect       1             [Rn]
 010   Reg + imm8         2             [Rn + imm8]
 011   Reg + imm16        3             [Rn + imm16]
-100   Absolute16         2             [addr16]
-101   PC-relative8       1             PC + signed imm8
+100   PC-cond-relative16 3             [addr16]
+101   PC-relative16      2             PC + signed imm16
 110   Immediate8         1             #imm8
 111   Immediate16        2             #imm16
 
