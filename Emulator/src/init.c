@@ -10,7 +10,6 @@ Emulator* init(){
     Emulator *emu = t_malloc(sizeof(Emulator));
     if(!emu) return NULL;
 
-    memset(emu->ram, 0, sizeof(emu->ram));
 
     emu->sdk_io.input = SDK_CreateInput();
     if(!emu->sdk_io.input){
@@ -27,6 +26,10 @@ Emulator* init(){
 
     EMU_init_alu(&emu->alu);
     EMU_init_fpu(&emu->fpu);
+    memset(emu->ram, 0, sizeof(emu->ram));
+    emu->program_counter = 0;
+
+    emu->ram[0] = 0xa0;
 
     return emu;
 }

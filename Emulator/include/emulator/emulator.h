@@ -3,6 +3,8 @@
 
 #include "my_stdtypes.h"
 #include "SDK.h"
+
+#include "emulator/flags.h"
 #include "emulator/alu.h"
 #include "emulator/fpu.h"
 
@@ -17,6 +19,7 @@ typedef struct{
 
 typedef struct{
 
+    u16 program_counter;
     u8 ram[0x7fff];
     SDK_IO sdk_io;
     EMU_Alu alu;

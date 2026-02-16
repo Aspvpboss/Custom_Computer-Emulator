@@ -1,5 +1,4 @@
-#include "my_stdtypes.h"
-
+#include "debug.h"
 
 void print_cmp_flags(CMP_Flags flags){
  

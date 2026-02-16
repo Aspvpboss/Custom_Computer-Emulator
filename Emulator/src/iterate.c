@@ -1,5 +1,8 @@
 #include "iterate.h"
 
+#include "pipeline/execute.h"
+#include "pipeline/fetch.h"
+#include "pipeline/mmio.h"
 
 
 EMU_Result iterate(Emulator *emu){
@@ -22,6 +25,10 @@ EMU_Result iterate(Emulator *emu){
     if(SDK_Keyboard_JustPressed(input, SDL_SCANCODE_F)){
         return EMU_FAILURE;
     }
+
+
+    fetch(emu);
+
 
     return EMU_CONTINUE;
 }

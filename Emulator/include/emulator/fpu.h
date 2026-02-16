@@ -2,6 +2,7 @@
 #define EMU_FPU__
 
 #include "my_stdtypes.h"
+#include "emulator/flags.h"
 #include "MemTrack.h"
 
 enum FPU_Registers{

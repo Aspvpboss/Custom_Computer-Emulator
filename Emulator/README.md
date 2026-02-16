@@ -36,23 +36,23 @@ the 8 bit version of it, and the 16 bit version of it
 
 ISA
 
-// 7 memory instructions (operand will determine if 8 bit or 16 bit)
+// 6 memory instructions (operand will determine if 8 bit or 16 bit)
 LOAD - load from memory into register
 STR - store register into address in memory
 PUSH - push register into memory
 POP - pop from memory into register
 LDI - load integer immediate into int register
-LDF - load float immediate into float register
 MOV - reg to reg, reg to float, float to reg, float to float
 
 
 // byte in opcode will determine if absolute or relative
-// 5 control flow instructions
+// 6 control flow instructions
 SYSCALL - system call
 JMP - absolute or relative, depends on addressing mode
 JIF - same as jmp
 CAL - functional absolute or relative
 CIF - same as cal
+RET - returns from function call
 
 // 12 alu instructions
 ADD

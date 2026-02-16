@@ -1,7 +1,7 @@
 
 GCC = gcc
 
-SRC = $(wildcard src/*.c src/emulator/*.c)
+SRC = $(wildcard src/*.c src/emulator/*.c src/pipeline/*.c)
 OUT = build/CEMU.exe
 
 INCLUDE = -ISDK1/include -Iinclude  
