@@ -6,6 +6,7 @@
 
 enum ALU_Registers{
 
+    ALU_ZERO,
     ALU_ONE,
     ALU_TWO,
     ALU_THREE,
@@ -13,9 +14,9 @@ enum ALU_Registers{
     ALU_FIVE,
     ALU_SIX,
     ALU_SEVEN,
-    ALU_EIGHT,
-    FRAME_POINTER,
-    STACK_POINTER,
+    ALU_ROM_BANK,
+    ALU_FRAME_POINTER,
+    ALU_STACK_POINTER,
     ALU_REG_AMOUNT
 
 };

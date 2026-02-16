@@ -17,7 +17,7 @@ typedef struct{
 
 typedef struct{
 
-    u8 memory[0xffff];
+    u8 ram[0x7fff];
     SDK_IO sdk_io;
     EMU_Alu alu;
     EMU_Fpu fpu;

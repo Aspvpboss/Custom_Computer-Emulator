@@ -1,4 +1,19 @@
 
+
+Address space
+
+0x0000 - 0x00FF: hardcoded bootloader (256B)
+
+0x0100 - 0x7EFF: RAM (~32 KiB)
+
+0x7F00 - 0x7FFF: MMIO (256B)
+
+0x8000 - 0xFFFF: Selected ROM bank (32 KiB for each bank)
+    can support techinically up to 2 ^ 16 amount of banks
+    each bank being a binary file that is loaded
+
+
+
 Addressing modes
 
 Mode  Name               Extra bytes   Meaning
