@@ -1,4 +1,5 @@
 #include "pipeline/fetch.h"
+#include "pipeline/execute.h"
 #include "debug.h"
 
 
@@ -10,6 +11,7 @@ i64 fetch(Emulator *emu){
 
     u8 byte_amount = 0;
 
+    // flag addressing modes
     switch(opcode >> 5){
 
 
