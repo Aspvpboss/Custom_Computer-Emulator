@@ -29,3 +29,20 @@ void print_cmp_flags(CMP_Flags flags){
     d_printf("\n");
 
 }
+
+
+
+void print_individual_bytes(u32 value){
+
+    for(u8 string_index = 0; string_index < 4; string_index++){
+
+        for(u8 char_index = 0; char_index < 8; char_index++){
+            putchar((value & 0x80000000) ? '1' : '0');        
+            value <<= 1;     
+        }
+
+        putchar(' ');
+    }
+
+    putchar('\n');
+}

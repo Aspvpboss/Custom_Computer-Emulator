@@ -30,6 +30,8 @@ Emulator* init(){
     emu->program_counter = 0;
 
     emu->ram[0] = 0xa0;
+    emu->ram[1] = 0xf0;
+    emu->ram[2] = 0x0f;
 
     return emu;
 }

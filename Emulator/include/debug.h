@@ -4,6 +4,7 @@
 #include "emulator/flags.h"
 
 void print_cmp_flags(CMP_Flags flags);
+void print_individual_bytes(u32 value);
 
 #ifdef DEBUG
     #define d_printf(fmt, ...) printf(fmt, ##__VA_ARGS__)
