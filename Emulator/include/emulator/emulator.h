@@ -11,6 +11,7 @@
 
 typedef struct{
 
+    SDK_Time *time;
     SDK_Input *input;
     SDK_Display *display;
 

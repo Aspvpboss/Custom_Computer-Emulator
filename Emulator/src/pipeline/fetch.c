@@ -7,6 +7,10 @@ i64 fetch(Emulator *emu){
 
     u8 *ram = emu->ram;
 
+    if(emu->program_counter == __UINT16_MAX__ / 2){
+        emu->program_counter = 0;
+    } 
+    
     u8 opcode = ram[emu->program_counter];
     i32 instruction = 0;
     instruction |= opcode;
@@ -56,6 +60,9 @@ i64 fetch(Emulator *emu){
     for(u8 i = 1; i <= extra_bytes; i++){
         emu->program_counter++;
         instruction |= ((u32)ram[emu->program_counter] << (8 * i));
+        if(emu->program_counter == __UINT16_MAX__ / 2){
+            emu->program_counter = 0;
+        } 
     }
 
 

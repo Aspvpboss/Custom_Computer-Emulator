@@ -24,6 +24,14 @@ Emulator* init(){
         return NULL;
     }
 
+    emu->sdk_io.time = SDK_CreateTime(1000);
+    if(!emu->sdk_io.time){
+        SDK_DestroyInput(emu->sdk_io.input); 
+        SDK_DestroyDisplay(emu->sdk_io.display);
+        t_free(emu);
+        return NULL;
+    }
+
     EMU_init_alu(&emu->alu);
     EMU_init_fpu(&emu->fpu);
     memset(emu->ram, 0, sizeof(emu->ram));

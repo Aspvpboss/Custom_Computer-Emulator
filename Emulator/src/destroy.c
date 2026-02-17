@@ -5,6 +5,7 @@ void destroy_emu(Emulator *emu){
 
     SDK_DestroyDisplay(emu->sdk_io.display);
     SDK_DestroyInput(emu->sdk_io.input);
+    SDK_DestroyTime(emu->sdk_io.time);
     t_free(emu);
 }
 
