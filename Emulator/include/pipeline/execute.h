@@ -1,6 +1,8 @@
 #ifndef EMU_EXECUTE_H_
 #define EMU_EXECUTE_H_
 
+#include "emulator/emulator.h"
+
 typedef enum{
 
     ADDR_REG,
@@ -13,5 +15,7 @@ typedef enum{
     ADDR_IMMEDIATE_SIXTEEN
 
 } EMU_Addressing_Modes;
+
+int execute(Emulator *emu, u32 instruction);
 
 #endif

@@ -55,13 +55,11 @@ i64 fetch(Emulator *emu){
 
     for(u8 i = 1; i <= extra_bytes; i++){
         emu->program_counter++;
-        instruction |= (ram[emu->program_counter] << (8 * i));
+        instruction |= ((u32)ram[emu->program_counter] << (8 * i));
     }
 
-    print_individual_bytes(instruction);
 
-    emu->program_counter = 0;
+    emu->program_counter++;
 
     return (i64)instruction;
 }
-
