@@ -14,11 +14,6 @@ most functions will be XIP, but there should be a function in ram that will swit
     can support techinically up to 2 ^ 16 amount of banks
     each bank being a binary file that is loaded
 
-| Left-aligned | Center-aligned | Right-aligned |
-|:---|:---:|---:|
-| Content | Content | Content |
-| Content | Content | Content |
-
 # Addressing modes
 
 |Mode| Name | Extra bytes | Meaning |
@@ -36,7 +31,7 @@ most functions will be XIP, but there should be a function in ram that will swit
 # Registers
 | ALU registers | FPU registers |
 |:---:|:---:|
-| 8 16-bit registers, but split into sixteen registers to be able to address the full 16-bit or just the lower 8-bit | 8 16-bit IEEE floating point registers |
+| 8 16-bit registers, split into sixteen registers for full and 8-bit use | 8 16-bit IEEE floating point registers |
 
     
 
