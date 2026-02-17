@@ -21,7 +21,7 @@ int main(){
     while(result == EMU_CONTINUE){
 
         result = iterate(emu);
-
+        
         if(result == EMU_FAILURE){
             d_printf("EMU failed\n"); 
             destroy(emu);

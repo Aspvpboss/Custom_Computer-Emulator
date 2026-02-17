@@ -4,6 +4,6 @@
 #include "my_stdtypes.h"
 #include "emulator/emulator.h"
 
-i64 fetch(Emulator *emu);
+u32 fetch(Emulator *emu);
 
 #endif

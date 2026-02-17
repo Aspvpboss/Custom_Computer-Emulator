@@ -3,7 +3,7 @@
 #include "debug.h"
 
 
-i64 fetch(Emulator *emu){
+u32 fetch(Emulator *emu){
 
     u8 *ram = emu->ram;
 
@@ -12,7 +12,7 @@ i64 fetch(Emulator *emu){
     } 
     
     u8 opcode = ram[emu->program_counter];
-    i32 instruction = 0;
+    u32 instruction = 0;
     instruction |= opcode;
     
     u8 extra_bytes = 0;
@@ -68,5 +68,5 @@ i64 fetch(Emulator *emu){
 
     emu->program_counter++;
 
-    return (i64)instruction;
+    return instruction;
 }
