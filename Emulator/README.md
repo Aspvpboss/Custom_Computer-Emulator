@@ -2,7 +2,6 @@
 
 # Address space
 
-most functions will be XIP, but there should be a function in ram that will switch banks, so that the program isn't running from the rom bank while it is switch banks
 
 0x0000 - 0x00FF: hardcoded bootloader (256B)
 
@@ -13,6 +12,8 @@ most functions will be XIP, but there should be a function in ram that will swit
 0x8000 - 0xFFFF: Selected ROM bank (32 KiB for each bank)
     can support techinically up to 2 ^ 16 amount of banks
     each bank being a binary file that is loaded
+
+most functions will XIP (execute in place), but there should be a function in loaded from rom into ram that will switch banks, so that the program isn't running from the rom bank while it is switch banks
 
 # Addressing modes
 
