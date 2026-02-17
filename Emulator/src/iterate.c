@@ -28,9 +28,11 @@ EMU_Result iterate(Emulator *emu){
 
     u32 instruction = fetch(emu);
 
-    execute(emu, instruction);
+    i8 result = execute(emu, instruction);
 
-    
+    if(result == 1){
+        return EMU_SUCCESS;
+    }
 
     return EMU_CONTINUE;
 }
