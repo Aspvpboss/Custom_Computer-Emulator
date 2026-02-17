@@ -1,6 +1,6 @@
 
 
-Address space
+# Address space
 
 most functions will be XIP, but there should be a function in ram that will switch banks, so that the program isn't running from the rom bank while it is switch banks
 
@@ -14,73 +14,74 @@ most functions will be XIP, but there should be a function in ram that will swit
     can support techinically up to 2 ^ 16 amount of banks
     each bank being a binary file that is loaded
 
+| Left-aligned | Center-aligned | Right-aligned |
+|:---|:---:|---:|
+| Content | Content | Content |
+| Content | Content | Content |
+
+# Addressing modes
+
+|Mode| Name | Extra bytes | Meaning |
+|:---:|:---:|:---:|:---:|
+| 000 | Reg | 1 | Rn | 
+| 001 | Reg indirect | 1 | [Rn]
+| 010 | Reg + imm8 | 2 | [Rn + imm8] |
+| 011 |   Reg + imm16 | 3 | [Rn + imm16] |
+| 100 |  PC-cond-relative16 | 3 | [addr16] |
+| 101 |  PC-relative16 | 2 | PC + signed imm16 |
+| 110 |  Immediate8 | 1 | #imm8 |
+| 111 |  Immediate16 | 2 |#imm16 |
 
 
-Addressing modes
+# Registers
+| ALU registers | FPU registers |
+|:---:|:---:|
+| 8 16-bit registers, but split into sixteen registers to be able to address the full 16-bit or just the lower 8-bit | 8 16-bit IEEE floating point registers |
 
-Mode  Name               Extra bytes   Meaning
---------------------------------------------------------
-000   Reg                1             Rn
-001   Reg indirect       1             [Rn]
-010   Reg + imm8         2             [Rn + imm8]
-011   Reg + imm16        3             [Rn + imm16]
-100   PC-cond-relative16 3             [addr16]
-101   PC-relative16      2             PC + signed imm16
-110   Immediate8         1             #imm8
-111   Immediate16        2             #imm16
+    
 
+# ISA
 
-of the 8 general purpose register, but there will "16 general purpose registers"
-the 8 bit version of it, and the 16 bit version of it
+### 32 total instructions
 
-
-ISA
-
-// 6 memory instructions (operand will determine if 8 bit or 16 bit)
-LOAD - load from memory into register
-STR - store register into address in memory
-PUSH - push register into memory
-POP - pop from memory into register
-LDI - load integer immediate into int register
-MOV - reg to reg, reg to float, float to reg, float to float
+#### 6 memory instructions
+- LOAD - load from memory into register
+- STR - store register into address in memory
+- PUSH - push register into memory
+- POP - pop from memory into register
+- LDI - load integer immediate into int register
+- MOV - reg to reg, reg to float, float to reg, float to float
 
 
-// byte in opcode will determine if absolute or relative
-// 6 control flow instructions
-SYSCALL - system call
-JMP - absolute or relative, depends on addressing mode
-JIF - same as jmp
-CAL - functional absolute or relative
-CIF - same as cal
-RET - returns from function call
+#### 6 control flow instructions
+- SYSCALL - system call
+- JMP - absolute or relative, depends on addressing mode
+- JIF - same as jmp
+- CAL - functional absolute or relative
+- CIF - same as cal
+- RET - returns from function call
 
-// 12 alu instructions
-ADD
-SUB
-MUL
-DIV
-MOD
-CMP
+#### 12 alu instructions
+- ADD
+- SUB
+- MUL
+- DIV
+- MOD
+- CMP
+- AND
+- NOR
+- XOR
+- ARS
+- LRS
+- LLS
 
-AND
-NOR
-XOR
+#### 8 float instructions
+- FADD
+- FSUB
+- FMUL
+- FDIV
+- FSQRT
+- FCMP
+- FINT
+- IFLO
 
-ARS
-LRS
-LLS
-
-
-// 8 float instructions
-FADD
-FSUB
-FMUL
-FDIV
-FSQRT
-
-FCMP
-FINT
-IFLO
-
-
-// 32 total instructions
