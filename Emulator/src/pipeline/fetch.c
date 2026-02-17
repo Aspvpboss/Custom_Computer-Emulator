@@ -21,7 +21,7 @@ u32 fetch(Emulator *emu){
     switch((EMU_Addressing_Modes)(opcode >> 5)){
 
         case ADDR_REG:
-            extra_bytes = 1;
+            extra_bytes = 3;
             break;
 
         case ADDR_REG_INDIRECT:
@@ -36,11 +36,11 @@ u32 fetch(Emulator *emu){
             extra_bytes = 3;
             break;
 
-        case ADDR_PC_COND_RELATIVE_SIXTEEN:
+        case ADDR_PC_RELATIVE_SIXTEEN:
             extra_bytes = 3;
             break;
 
-        case ADDR_PC_RELATIVE_SIXTEEN:
+        case ADDR_PC_RELATIVE_EIGHT:
             extra_bytes = 2;
             break;
 

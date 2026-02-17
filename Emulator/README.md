@@ -19,14 +19,14 @@ most functions will XIP (execute in place), but there should be a function in lo
 
 |Mode| Name | Extra bytes | Meaning |
 |:---:|:---:|:---:|:---:|
-| 000 | Reg + Reg + Reg | 3 | Rn0 + Rn1 = Rn2 | 
+| 000 | Reg + Reg + Reg | 2 | Rn0 + Rn1 = Rn2 | 
 | 001 | Reg indirect | 1 | [Rn]
 | 010 | Reg + imm8 | 2 | [Rn + imm8] |
-| 011 |   Reg + imm16 | 3 | [Rn + imm16] |
-| 100 |  PC-relative16 | 3 | PC + signed imm16 |
-| 101 |  PC-relative8 | 2 | PC + signed imm8 |
+| 011 | Reg + imm16 | 3 | [Rn + imm16] |
+| 100 | Reg + Reg + imm8 | 2 | Reg + imm8 = Reg |
+| 101 | Reg + Reg + imm16 | 3 | Reg + imm16 = Reg |
 | 110 |  Immediate8 | 1 | #imm8 |
-| 111 |  Immediate16 | 2 |#imm16 |
+| 111 |  Immediate16 | 2 | #imm16 |
 
 
 # Registers
@@ -50,7 +50,7 @@ most functions will XIP (execute in place), but there should be a function in lo
 
 
 #### 6 control flow instructions
-- SYSCALL - system call
+- SYSCALL - system call special functions (not in memory)
 - JMP - absolute or relative, depends on addressing mode
 - JIF - same as jmp
 - CAL - functional absolute or relative
