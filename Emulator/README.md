@@ -19,12 +19,12 @@ most functions will XIP (execute in place), but there should be a function in lo
 
 |Mode| Name | Extra bytes | Meaning |
 |:---:|:---:|:---:|:---:|
-| 000 | Reg | 1 | Rn | 
+| 000 | Reg + Reg + Reg | 3 | Rn0 + Rn1 = Rn2 | 
 | 001 | Reg indirect | 1 | [Rn]
 | 010 | Reg + imm8 | 2 | [Rn + imm8] |
 | 011 |   Reg + imm16 | 3 | [Rn + imm16] |
-| 100 |  PC-cond-relative16 | 3 | [addr16] |
-| 101 |  PC-relative16 | 2 | PC + signed imm16 |
+| 100 |  PC-relative16 | 3 | PC + signed imm16 |
+| 101 |  PC-relative8 | 2 | PC + signed imm8 |
 | 110 |  Immediate8 | 1 | #imm8 |
 | 111 |  Immediate16 | 2 |#imm16 |
 
@@ -36,7 +36,7 @@ most functions will XIP (execute in place), but there should be a function in lo
 
     
 
-# ISA
+# Instruction Set
 
 ### 32 total instructions
 
@@ -58,26 +58,26 @@ most functions will XIP (execute in place), but there should be a function in lo
 - RET - returns from function call
 
 #### 12 alu instructions
-- ADD
-- SUB
-- MUL
-- DIV
-- MOD
-- CMP
-- AND
-- NOR
-- XOR
-- ARS
-- LRS
-- LLS
+- ADD - adds two integers
+- SUB - subtracts two integers
+- MUL - multiplys two integers
+- DIV - divides two integers
+- MOD - modulos two integers
+- CMP - compares two integers
+- AND - ands two integers
+- NOR - nors two integers
+- XOR - xors two integers
+- ARS - arthimatic right shifts a integer
+- LRS - logical right shifts a integer
+- LLS - logical left shifts a integer
 
 #### 8 float instructions
-- FADD
-- FSUB
-- FMUL
-- FDIV
-- FSQRT
-- FCMP
-- FINT
-- IFLO
+- FADD - adds two floats
+- FSUB - subtracts two floats
+- FMUL - multiplys two floats
+- FDIV - divides two floats
+- FSQRT - takes square root of float
+- FCMP - compares two floats
+- FINT - converts float to integer
+- IFLO - converts integer to float
 

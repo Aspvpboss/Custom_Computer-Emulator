@@ -5,7 +5,7 @@
 int execute(Emulator *emu, u32 instruction){
 
     EMU_Instructions opcode = instruction & 0x00000001f;
-    EMU_Addressing_Modes addressing_mode = (instruction & 0x000000e0) >> 5;
+    // EMU_Addressing_Modes addressing_mode = (instruction & 0x000000e0) >> 5;
 
     switch(opcode){
 
@@ -109,9 +109,5 @@ int execute(Emulator *emu, u32 instruction){
             break;
     }
 
-    d_printf("%d\n", opcode);
-    d_printf("%d\n", addressing_mode);
-    print_individual_bytes(instruction);
-
-    return 1;
+    return 0;
 }

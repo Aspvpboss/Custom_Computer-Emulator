@@ -29,7 +29,7 @@ int main(){
         }
 
         if(SDK_Keyboard_JustPressed(emu->sdk_io.input, SDL_SCANCODE_T)){
-            d_printf("                                        \r %.2f - dt: %.10f\r", sdk_io->time->fps, sdk_io->time->dt);
+            printf("                                        \r %.2f - dt: %.10f\r", sdk_io->time->fps, sdk_io->time->dt);
         }
 
         if(SDK_Keyboard_JustPressed(sdk_io->input, SDL_SCANCODE_SPACE)){
