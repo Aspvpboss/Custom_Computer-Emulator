@@ -3,7 +3,8 @@
 
 #include "my_stdtypes.h"
 #include "emulator/emulator.h"
+#include "pipeline/instruction.h"
 
-u64 fetch(Emulator *emu);
+int fetch(Emulator *emu, EMU_Decoded_Instruction *instruction);
 
 #endif

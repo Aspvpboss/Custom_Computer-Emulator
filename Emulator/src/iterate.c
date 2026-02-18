@@ -26,9 +26,11 @@ EMU_Result iterate(Emulator *emu){
         return EMU_FAILURE;
     }
 
-    u64 instruction = fetch(emu);
+    EMU_Decoded_Instruction instruction = {0};
 
-    i8 result = execute(emu, instruction);
+    fetch(emu, &instruction);
+
+    i8 result = execute(emu, &instruction);
 
     if(result == 1){
         return EMU_SUCCESS;

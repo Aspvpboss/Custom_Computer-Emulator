@@ -2,9 +2,9 @@
 #include "debug.h"
 
 
-int execute(Emulator *emu, u32 instruction){
+int execute(Emulator *emu, EMU_Decoded_Instruction *instruction){
 
-    EMU_Instructions opcode = instruction & 0x00000001f;
+    EMU_Instructions opcode = EMU_JMP;
     // EMU_Addressing_Modes addressing_mode = (instruction & 0x000000e0) >> 5;
 
     switch(opcode){

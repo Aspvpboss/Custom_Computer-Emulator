@@ -1,9 +1,8 @@
 #include "pipeline/fetch.h"
-#include "pipeline/execute.h"
 #include "debug.h"
 
 
-u64 fetch(Emulator *emu){
+int fetch(Emulator *emu, EMU_Decoded_Instruction *instruction){
 
     u8 *ram = emu->ram;
 
@@ -11,11 +10,10 @@ u64 fetch(Emulator *emu){
         emu->program_counter = 0;
     } 
     
-    u8 opcode = ram[emu->program_counter];
-    u64 instruction = 0;
-    instruction |= opcode;
-    
     u8 extra_bytes = 0;
+    u8 opcode = ram[emu->program_counter];
+    instruction->raw_instruction |= opcode;
+    
 
     // flag addressing modes
     switch((EMU_Addressing_Modes)(opcode >> 5)){
@@ -59,7 +57,7 @@ u64 fetch(Emulator *emu){
 
     for(u8 i = 1; i <= extra_bytes; i++){
         emu->program_counter++;
-        instruction |= ((u64)ram[emu->program_counter] << (8 * i));
+        instruction->raw_instruction |= ((u64)ram[emu->program_counter] << (8 * i));
         if(emu->program_counter == __UINT16_MAX__ / 2){
             emu->program_counter = 0;
         } 
@@ -67,11 +65,10 @@ u64 fetch(Emulator *emu){
 
 
     emu->program_counter++;
-
-    emu->program_counter = 0;
+    emu->program_counter = 0; //debug 
 
     printf("%d\n", (opcode >> 5));
-    print_individual_bytes(instruction);
+    print_individual_bytes(instruction->raw_instruction);
 
-    return instruction;
+    return 0;
 }
