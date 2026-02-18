@@ -11,12 +11,11 @@ int fetch(Emulator *emu, EMU_Decoded_Instruction *instruction){
     } 
     
     u8 extra_bytes = 0;
-    u8 opcode = ram[emu->program_counter];
-    instruction->raw_instruction |= opcode;
-    
+    instruction->raw_instruction |= ram[emu->program_counter];
+    instruction->addressing_mode = (EMU_Addressing_Modes)(instruction->raw_instruction >> 5);
 
     // flag addressing modes
-    switch((EMU_Addressing_Modes)(opcode >> 5)){
+    switch(instruction->addressing_mode){
 
         case ADDR_REG:
             extra_bytes = 2;
@@ -65,10 +64,8 @@ int fetch(Emulator *emu, EMU_Decoded_Instruction *instruction){
 
 
     emu->program_counter++;
-    emu->program_counter = 0; //debug 
+    emu->program_counter = 0;
 
-    printf("%d\n", (opcode >> 5));
-    print_individual_bytes(instruction->raw_instruction);
 
     return 0;
 }

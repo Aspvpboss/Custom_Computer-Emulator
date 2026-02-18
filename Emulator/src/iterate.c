@@ -2,6 +2,7 @@
 
 #include "pipeline/execute.h"
 #include "pipeline/fetch.h"
+#include "pipeline/decode.h"
 #include "pipeline/mmio.h"
 
 
@@ -28,13 +29,17 @@ EMU_Result iterate(Emulator *emu){
 
     EMU_Decoded_Instruction instruction = {0};
 
-    fetch(emu, &instruction);
+    i8 result = 0;
 
-    i8 result = execute(emu, &instruction);
+    result = fetch(emu, &instruction);
+    if(result == 1) return EMU_SUCCESS;
+    
+    result = decode(emu, &instruction);
+    if(result == 1) return EMU_SUCCESS;
+    
+    result = execute(emu, &instruction);
+    if(result == 1) return EMU_SUCCESS;
 
-    if(result == 1){
-        return EMU_SUCCESS;
-    }
 
     return EMU_CONTINUE;
 }

@@ -37,10 +37,10 @@ Emulator* init(){
     memset(emu->ram, 0, sizeof(emu->ram));
     emu->program_counter = 0;
 
-    emu->ram[0] = 0x6a;
-    emu->ram[1] = 0xf0;
-    emu->ram[2] = 0x0f;
-    emu->ram[3] = 0xaa;
+    emu->ram[0] = 0b10100000;
+    emu->ram[1] = 0b01101010;
+    emu->ram[2] = 0xff;
+    emu->ram[3] = 0xff;
     emu->ram[4] = 0xaa;
     emu->ram[5] = 0xff;
 
