@@ -3,7 +3,7 @@
 #include "debug.h"
 
 
-u32 fetch(Emulator *emu){
+u64 fetch(Emulator *emu){
 
     u8 *ram = emu->ram;
 
@@ -12,7 +12,7 @@ u32 fetch(Emulator *emu){
     } 
     
     u8 opcode = ram[emu->program_counter];
-    u32 instruction = 0;
+    u64 instruction = 0;
     instruction |= opcode;
     
     u8 extra_bytes = 0;
@@ -21,27 +21,27 @@ u32 fetch(Emulator *emu){
     switch((EMU_Addressing_Modes)(opcode >> 5)){
 
         case ADDR_REG:
-            extra_bytes = 3;
+            extra_bytes = 2;
             break;
 
         case ADDR_REG_INDIRECT:
             extra_bytes = 1;
             break;
 
-        case ADDR_REG_EIGHT_IMED:
-            extra_bytes = 2;
-            break;
-
-        case ADDR_REG_SIXTEEN_IMED:
+        case ADDR_REG_INDEX_EIGHT:
             extra_bytes = 3;
             break;
 
-        case ADDR_PC_RELATIVE_SIXTEEN:
-            extra_bytes = 3;
+        case ADDR_REG_INDEX_SIXTEEN:
+            extra_bytes = 4;
             break;
 
-        case ADDR_PC_RELATIVE_EIGHT:
+        case ADDR_REG_IMMEDIATE_EIGHT:
             extra_bytes = 2;
+            break;
+
+        case ADDR_REG_IMMEDIATE_SIXTEEN:
+            extra_bytes = 3;
             break;
 
         case ADDR_IMMEDIATE_EIGHT:
@@ -67,6 +67,10 @@ u32 fetch(Emulator *emu){
 
 
     emu->program_counter++;
+
+    emu->program_counter = 0;
+
+    print_individual_bytes(instruction);
 
     return instruction;
 }

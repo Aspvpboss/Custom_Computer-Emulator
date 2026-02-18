@@ -19,12 +19,12 @@ most functions will XIP (execute in place), but there should be a function in lo
 
 |Mode| Name | Extra bytes | Meaning |
 |:---:|:---:|:---:|:---:|
-| 000 | Reg + Reg + Reg | 2 | Rn0 + Rn1 = Rn2 | 
-| 001 | Reg indirect | 1 | [Rn]
-| 010 | Reg + imm8 | 2 | [Rn + imm8] |
-| 011 | Reg + imm16 | 3 | [Rn + imm16] |
-| 100 | Reg + Reg + imm8 | 2 | Reg + imm8 = Reg |
-| 101 | Reg + Reg + imm16 | 3 | Reg + imm16 = Reg |
+| 000 | Reg | 2 | Rn0 + Rn1 -> Rn2 | 
+| 001 | Reg indirect | 1 | [Rn] |
+| 010 | Reg index imm8 | 3 | [Rn + imm8] |
+| 011 | Reg index imm16 | 4 | [Rn + imm16] -> Rn |
+| 100 | Reg imm8 | 2 | Rn + imm8 -> Rn |
+| 101 | Reg imm16 | 3 | Rn + imm16 -> Rn |
 | 110 |  Immediate8 | 1 | #imm8 |
 | 111 |  Immediate16 | 2 | #imm16 |
 
@@ -32,8 +32,9 @@ most functions will XIP (execute in place), but there should be a function in lo
 # Registers
 | ALU registers | FPU registers |
 |:---:|:---:|
-| 8 16-bit registers, split into sixteen registers for full and 8-bit use | 8 16-bit IEEE floating point registers |
+| 8 16-bit registers, stack pointer, frame pointer, and rom bank register | 8 16-bit IEEE floating point registers |
 
+Instructions normally encode the ALU register operand using a 4-bit field. For memory operations, an additional high bit extends this field to 5 bits, where the extra bit specifies the transfer width (0 = 16-bit word, 1 = 8-bit byte)
     
 
 # Instruction Set

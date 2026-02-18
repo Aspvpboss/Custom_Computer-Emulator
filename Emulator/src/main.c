@@ -18,6 +18,7 @@ int main(){
 
     bool limit_fps = false;
 
+
     while(result == EMU_CONTINUE){
 
         result = iterate(emu);
