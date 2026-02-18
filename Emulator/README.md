@@ -29,6 +29,19 @@ most functions will XIP (execute in place), but there should be a function in lo
 | 111 |  Immediate16 | 2 | #imm16 |
 
 
+# Operands for Addressing modes
+
+| Mode | Op0 | Op1 | Op2 |
+|:---:|:---:|:---:|:---:|
+| Reg | regA | regB | regC |
+| Reg Indirect | pointer reg | n/a | n/a |
+| Reg index imm8 | regA | regB | imm8 |
+| Reg index imm16 | regA | regB | imm16 |
+| Reg imm8 | regA |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+
 # Registers
 | ALU registers | FPU registers |
 |:---:|:---:|
