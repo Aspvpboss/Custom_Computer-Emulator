@@ -59,7 +59,7 @@ u64 fetch(Emulator *emu){
 
     for(u8 i = 1; i <= extra_bytes; i++){
         emu->program_counter++;
-        instruction |= ((u32)ram[emu->program_counter] << (8 * i));
+        instruction |= ((u64)ram[emu->program_counter] << (8 * i));
         if(emu->program_counter == __UINT16_MAX__ / 2){
             emu->program_counter = 0;
         } 
@@ -70,6 +70,7 @@ u64 fetch(Emulator *emu){
 
     emu->program_counter = 0;
 
+    printf("%d\n", (opcode >> 5));
     print_individual_bytes(instruction);
 
     return instruction;

@@ -109,5 +109,5 @@ int execute(Emulator *emu, u32 instruction){
             break;
     }
 
-    return 0;
+    return 1;
 }
