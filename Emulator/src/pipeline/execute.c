@@ -109,5 +109,5 @@ int execute(Emulator *emu, EMU_Decoded_Instruction *instruction){
             break;
     }
 
-    return 1;
+    return 0;
 }

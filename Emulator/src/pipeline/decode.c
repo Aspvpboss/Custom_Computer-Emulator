@@ -48,9 +48,6 @@ int decode(Emulator *emu, EMU_Decoded_Instruction *instruction){
             break;
     }
    
-    for(int i = 0; i < 3; i++){
-        printf("%d\n", instruction->operands[i]);
-    }
 
     return 0;
 }

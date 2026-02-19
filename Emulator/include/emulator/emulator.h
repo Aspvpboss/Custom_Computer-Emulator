@@ -30,4 +30,8 @@ typedef struct{
 } Emulator;
 
 
+
+int emulator_main(void *data);
+
+
 #endif
