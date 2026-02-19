@@ -37,10 +37,10 @@ most functions will XIP (execute in place), but there should be a function in lo
 | Reg Indirect | pointer reg | n/a | n/a |
 | Reg index imm8 | regA | regB | imm8 |
 | Reg index imm16 | regA | regB | imm16 |
-| Reg imm8 | regA |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+| Reg imm8 | regA | regB | imm8 |
+| Reg imm16 | regA | regB | imm16 |
+| Immediate8 | imm8 | n/a | n/a |
+| Immediate16 | imm16 | n/a | n/a |
 
 # Registers
 | ALU registers | FPU registers |
@@ -95,3 +95,15 @@ Instructions normally encode the ALU register operand using a 4-bit field. For m
 - FINT - converts float to integer
 - IFLO - converts integer to float
 
+
+
+
+# Memory Mapped IO
+
+### The Screen
+- Emulator thread & Render Thread
+
+- Emulator frame buffer -(memcpy)> back buffer
+- Emulator frame ready -(atomic int)> swap buffers for render thread
+
+- This means no thread stalling for rendering
